@@ -1,0 +1,121 @@
+---
+- hosts: ldap
+  remote_user: root
+  roles:
+    - aelogica.common
+    - aelogica.hardening
+  tasks:
+    - name: Allow port 389
+      ufw:
+        rule: allow
+        port: 389
+
+- hosts: ldap
+  remote_user: root
+  tasks:
+    - name: Update APT package cache
+      apt: update_cache=yes upgrade=safe
+
+- hosts: ldap
+  remote_user: root
+  tasks:
+    - name: Install packages
+      apt: pkg={{ item }} state=latest
+      with_items:
+        - slapd
+        - ldap-utils
+        - python-selinux
+        - openssl
+      tags: ldap
+    - name: Apply slapd configuration
+      shell: 'dpkg-reconfigure -f noninteractive slapd'
+      tags: ldap
+
+- hosts: ldap
+  remote_user: root
+  tasks:
+    - name: Install phpldapadmin
+      apt: pkg={{ item }} state=latest
+      with_items:
+        - phpldapadmin
+
+- hosts: ldap
+  remote_user: root
+  tasks:
+    - name: Add openldap group to ssl-cert group
+      command: usermod -aG ssl-cert openldap
+    - name: Copy cert.pem
+      copy:
+        src: cert.pem
+        dest: /etc/ssl/certs/cert.pem
+    - name: Copy ca.pem
+      copy:
+        src: ca.pem
+        dest: /etc/ssl/certs/ca.pem
+    - name: Copy key.pem
+      copy:
+        src: key.pem
+        dest: /etc/ssl/private/key.pem
+        mode: 0640
+        group: ssl-cert
+
+- hosts: ldap
+  remote_user: root
+  tasks:
+    - name: Copy config.php
+      template:
+        src: config.php
+        dest: /etc/phpldapadmin/config.php
+    - name: Copy TemplateRender.php
+      copy:
+        src: TemplateRender.php
+        dest: /usr/share/phpldapadmin/lib/TemplateRender.php
+
+- hosts: ldap
+  remote_user: root
+  tasks:
+    - name: Copy default site configuration
+      copy:
+        src: default
+        dest: /etc/apache2/sites-available/000-default.conf
+    - name: Copy default SSL site configuration
+      template:
+        src: default-ssl.conf
+        dest: /etc/apache2/sites-available/default-ssl.conf
+    - name: Enable SSL module
+      command: a2enmod ssl
+    - name: Enable SSL site
+      command: a2ensite default-ssl
+    - name: Restart apache2
+      service:
+        name: apache2
+        state: restarted
+
+- hosts: ldap
+  remote_user: root
+  tasks:
+    - name: Copy addcerts.ldif
+      template:
+        src: addcerts.ldif
+        dest: /root/addcerts.ldif
+    - name: Copy forcetls.ldif
+      copy:
+        src: forcetls.ldif
+        dest: /root/forcetls.ldif
+
+# Manual steps
+- hosts: ldap
+  remote_user: root
+  tasks:
+    - name: Show command to setup slapd (will ask for info)
+      debug:
+        msg: dpkg-reconfigure slapd
+    - name: Show command to add certs to LDAP
+      debug:
+        msg: ldapmodify -H ldapi:// -Y EXTERNAL -f /root/addcerts.ldif
+    - name: Show command to force tls
+      debug:
+        msg: ldapmodify -H ldapi:// -Y EXTERNAL -f /root/forcetls.ldif
+    - name: Show command to restart slapd
+      debug:
+        msg: service slapd restart
