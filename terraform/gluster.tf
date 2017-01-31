@@ -11,7 +11,8 @@ resource "digitalocean_droplet" "gluster-1" {
   region="sfo2"
   size="1gb"
   ssh_keys=["${var.do_ssh_fingerprint}"]
-  volume_ids = ["${digitalocean_volume.gluster-1.id}"]
+  volume_ids=["${digitalocean_volume.gluster-1.id}"]
+  user_data="${file("user_data/gluster.yml")}"
 }
 
 resource "digitalocean_record" "gluster-1" {
@@ -35,7 +36,8 @@ resource "digitalocean_droplet" "gluster-2" {
   region="sfo2"
   size="1gb"
   ssh_keys=["${var.do_ssh_fingerprint}"]
-  volume_ids = ["${digitalocean_volume.gluster-2.id}"]
+  volume_ids=["${digitalocean_volume.gluster-2.id}"]
+  user_data="${file("user_data/gluster.yml")}"
 }
 
 resource "digitalocean_record" "gluster-2" {
