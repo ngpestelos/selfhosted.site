@@ -27,6 +27,13 @@ terraform apply plan.tfplan
 
 ### Ansible
 
+Download dependencies:
+
+```
+cd ansible
+ansible-galaxy -r requirements.yml
+```
+
 Clone [openshift-ansible](https://github.com/openshift/openshift-ansible).
 
 Customize `hosts.example` found in this project and place it inside `openshift-ansible`.
