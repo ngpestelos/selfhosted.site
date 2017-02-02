@@ -128,4 +128,25 @@ ansible-playbook -i hosts playbooks/byo/config.yml -vvvv
 
 This will take about an hour.
 
-The `-vvvv` switch enables very vebose output from Ansible.
+The `-vvvv` switch enables very verbose output from Ansible.
+
+After the run finishes, visit `https://master-1.selfhosted.site:8443` and login as `system:admin`.
+
+### GitLab
+
+Prepare persistent volumes.
+
+Create new project (GitLab).
+
+Import idea-to-production template.
+
+Troubleshoot errors:
+
+- file permissions
+- allow pods to run as root
+
+Fix routes:
+
+- enable SSL
+
+Visit `https://gitlab.selfhosted.site`.
