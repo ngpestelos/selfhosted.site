@@ -40,6 +40,8 @@ Copy from template:
 
 `cp hosts.example hosts`
 
+Copy `ca.pem`, `cert.pem`, and `key.pem` to `ansible/files`.
+
 Run the playbook:
 
 ```
