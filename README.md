@@ -107,6 +107,15 @@ sudo mkdir -p /mnt/gluster-2; sudo mount -o discard,defaults /dev/disk/by-id/scs
 
 ### OpenShift
 
+Test if SSH login works for the following hosts (need to login as root at least once):
+
+* `master-1.selfhosted.site`
+* `worker-1.selfhosted.site`
+* `worker-2.selfhosted.site`
+* `etcd-1.selfhosted.site`
+* `etcd-2.selfhosted.site`
+* `etcd-3.selfhosted.site`
+
 Clone [openshift-ansible](https://github.com/openshift/openshift-ansible).
 
 Customize `hosts.example` found in this project and place it inside `openshift-ansible`.

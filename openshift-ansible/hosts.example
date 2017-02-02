@@ -1,0 +1,29 @@
+[OSEv3:children]
+masters
+nodes
+etcd
+
+[OSEv3:vars]
+ansible_ssh_user=root
+deployment_type=origin
+containerized=true
+openshift_release=1.3.2
+openshift_hostname="{{ ansible_hostname }}.selfhosted.site"
+openshift_router_selector='region=infra'
+openshift_registry_selector='region=infra'
+openshift_master_default_subdomain='selfhosted.site'
+openshift_master_cluster_hostname='master-1.selfhosted.site'
+openshift_master_cluster_public_hostname='master-1.selfhosted.site'
+openshift_master_identity_providers=[{'name': 'ldap_auth', 'login': 'true', 'challenge': 'false', 'kind': 'LDAPPasswordIdentityProvider', 'attributes': { 'id': ['dn'], 'email': ['mail'], 'name': ['uid'], 'preferredUsername': ['uid'] }, 'bindDN': 'cn=admin,dc=selfhosted,dc=site', 'bindPassword': 'CHANGEME', 'url': "ldap://ldap.selfhosted.site/ou=Users,dc=selfhosted,dc=site?userid" }]
+
+[masters]
+master-1.selfhosted.site
+
+[nodes]
+worker-1.selfhosted.site openshift_node_labels="{'region': 'infra'}"
+worker-2.selfhosted.site
+
+[etcd]
+etcd-1.selfhosted.site
+etcd-2.selfhosted.site
+etcd-3.selfhosted.site
