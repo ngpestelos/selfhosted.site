@@ -48,9 +48,48 @@ Run the playbook:
 ansible-playbook -i hosts ldap.yml -vvvv
 ```
 
-Run manual steps.
+SSH into ldap:
 
-Add users via phpldapadmin.
+`ssh root@ldap.selfhosted.site`
+
+Run manual steps to setup LDAP (see Ansible stdout):
+
+Add organizational unit (Users). Within Users, add 
+
+Add users via phpldapadmin (go to `https://ldap.selfhosted.site/phpldapadmin`).
+
+
+### GlusterFS
+
+Shell into gluster-1:
+
+`ssh root@gluster-1.selfhosted.site`
+
+Probe for second gluster node:
+
+`gluster peer probe gluster-2.selfhosted.site`
+
+Initialize `/mnt/gluster-1`:
+
+```
+sudo mkfs.ext4 -F /dev/disk/by-id/scsi-0DO_Volume_gluster-1
+```
+
+Mount `/mnt/gluster-1`:
+
+```
+sudo mkdir -p /mnt/gluster-1; sudo mount -o discard,defaults /dev/disk/by-id/scsi-0DO_Volume_gluster-1 /mnt/gluster-1; echo /dev/disk/by-id/scsi-0DO_Volume_gluster-1 /mnt/gluster-1 ext4 defaults,nofail,discard 0 0 | sudo tee -a /etc/fstab
+```
+
+Exit the SSH connection.
+
+Shell into gluster-2:
+
+`ssh root@gluster-2.selfhosted.site`
+
+Probe for the first gluster node:
+
+`
 
 ### OpenShift
 
