@@ -118,12 +118,14 @@ Test if SSH login works for the following hosts (need to login as root at least 
 
 Clone [openshift-ansible](https://github.com/openshift/openshift-ansible).
 
-Customize `hosts.example` found in this project and place it inside `openshift-ansible`.
+Customize `hosts.example` found in this project and place it inside `../openshift-ansible`.
 
 Run the playbook:
 
 ```
 ansible-playbook -i hosts playbooks/byo/config.yml -vvvv
 ```
+
+This will take about an hour.
 
 The `-vvvv` switch enables very vebose output from Ansible.
