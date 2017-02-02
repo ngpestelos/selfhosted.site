@@ -81,6 +81,8 @@ Mount `/mnt/gluster-1`:
 sudo mkdir -p /mnt/gluster-1; sudo mount -o discard,defaults /dev/disk/by-id/scsi-0DO_Volume_gluster-1 /mnt/gluster-1; echo /dev/disk/by-id/scsi-0DO_Volume_gluster-1 /mnt/gluster-1 ext4 defaults,nofail,discard 0 0 | sudo tee -a /etc/fstab
 ```
 
+`/mnt/gluster-1` should be mounted.
+
 Exit the SSH connection.
 
 Shell into gluster-2:
@@ -89,7 +91,19 @@ Shell into gluster-2:
 
 Probe for the first gluster node:
 
-`
+`gluster peer probe gluster-1.selfhosted.site`
+
+Initialize: `/mnt/gluster-2`:
+
+```
+sudo mkfs.ext4 -F /dev/disk/by-id/scsi-0DO_Volume_gluster-2
+```
+
+Mount `/mnt/gluster-2`:
+
+```
+sudo mkdir -p /mnt/gluster-2; sudo mount -o discard,defaults /dev/disk/by-id/scsi-0DO_Volume_gluster-2 /mnt/gluster-2; echo /dev/disk/by-id/scsi-0DO_Volume_gluster-2 /mnt/gluster-2 ext4 defaults,nofail,discard 0 0 | sudo tee -a /etc/fstab
+```
 
 ### OpenShift
 
