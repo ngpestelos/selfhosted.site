@@ -31,7 +31,7 @@ Download dependencies:
 
 ```
 cd ansible
-ansible-galaxy -r requirements.yml
+ansible-galaxy install -r requirements.yml
 ```
 
 Clone [openshift-ansible](https://github.com/openshift/openshift-ansible).
