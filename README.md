@@ -34,6 +34,24 @@ cd ansible
 ansible-galaxy install -r requirements.yml
 ```
 
+### LDAP
+
+Copy from template:
+
+`cp hosts.example hosts`
+
+Run the playbook:
+
+```
+ansible-playbook -i hosts ldap.yml -vvvv
+```
+
+Run manual steps.
+
+Add users via phpldapadmin.
+
+### OpenShift
+
 Clone [openshift-ansible](https://github.com/openshift/openshift-ansible).
 
 Customize `hosts.example` found in this project and place it inside `openshift-ansible`.
