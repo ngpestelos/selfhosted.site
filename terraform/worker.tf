@@ -4,6 +4,7 @@ resource "digitalocean_droplet" "worker-1" {
   region="sfo2"
   size="8gb"
   ssh_keys=["${var.do_ssh_fingerprint}"]
+  user_data="${file("user_data/worker.yml")}"
 }
 
 resource "digitalocean_record" "worker-1" {
@@ -33,6 +34,7 @@ resource "digitalocean_droplet" "worker-2" {
   region="sfo2"
   size="8gb"
   ssh_keys=["${var.do_ssh_fingerprint}"]
+  user_data="${file("user_data/worker.yml")}"
 }
 
 resource "digitalocean_record" "worker-2" {

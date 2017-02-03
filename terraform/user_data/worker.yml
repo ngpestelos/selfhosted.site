@@ -1,0 +1,5 @@
+#cloud-config
+runcmd:
+  - yum -y install NetworkManager
+  - systemctl unmask NetworkManager
+  - systemctl start NetworkManager
