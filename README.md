@@ -1,13 +1,33 @@
 selfhosted.site
 ===============
 
-Proof-of-concept OpenShift Origin cluster on DigitalOcean.
+This is a tutorial on how to setup an [Openshift Origin](https://github.com/openshift/origin) cluster on [DigitalOcean](https://digitalocean.com). It is intended for those who are familiar 
+with Docker and Kubernetes and would like to bring up an OpenShift cluster from scratch.
+
+The goal is to setup a hypothetical platform-as-a-service for self-hosted apps, with a running continuous deployment pipeline (GitLab).
 
 TODO Cluster Diagram
 
-### DigitalOcean
+### Assumptions
 
-You must have a DigitalOcean account for provisioning droplets. In addition, you will need a SSH public key added to your account as well an API token.
+This tutorial is built using OS X 10.12.3 (with Homebrew as package manager).
+
+You will need to install these tools:
+
+* ansible v2.2.0.0
+* terraform v0.8.5
+* oc v1.3.2
+
+You will also need a DigitalOcean account (token and a SSH fingerprint).
+
+### Chapters
+
+* [Provision Droplets](doc/01-provision-droplets.md)
+* [Setup LDAP]
+* [Setup GlusterFS]
+* [Setup OpenShift]
+* [Deploy GitLab on OpenShift]
+* [Setup Continuous Deployment Pipeline]
 
 ### Terraform
 
