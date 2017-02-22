@@ -13,12 +13,17 @@ TODO Cluster Diagram
 #### Operating System
 
 * OS X 10.12.3
-* Homebrew 1.1.10
 
 #### Accounts
 
 * DigitalOcean
 
-### Chapters
+#### Tools
 
-* [DigitalOcean](digitalocean/README.md)
+* Homebrew 1.1.10
+* terraform 0.8.7
+
+### Tasks 
+
+* [Prepare DigitalOcean](digitalocean/README.md)
+* [Provision droplets](terraform/provision.md)

@@ -1,9 +1,10 @@
 resource "digitalocean_droplet" "ldap" {
-  image="ubuntu-14-04-x64"
+  image="coreos-stable"
   name="ldap"
   region="sfo2"
   size="1gb"
-  ssh_keys=["${var.do_ssh_fingerprint}"]
+  ssh_keys=["${var.do_ssh_key}"]
+  backups=true
 }
 
 resource "digitalocean_record" "ldap" {
