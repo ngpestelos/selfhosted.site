@@ -18,8 +18,8 @@ ExecStart=/usr/bin/docker run \
           --env LDAP_TLS_CIPHER_SUITE=SECURE128:-VERS-SSL3.0:+VERS-TLS1.2 \
           --env LDAP_TLS_VERIFY_CLIENT=never \
           --env LDAP_TLS_PROTOCOL_MIN=1.2 \
-          --env LDAP_ORGANISATION= \
-          --env LDAP_DOMAIN= \
+          --env LDAP_ORGANISATION="Self-Hosted Apps" \
+          --env LDAP_DOMAIN=selfhosted.site \
           --env LDAP_ADMIN_PASSWORD= \
           osixia/openldap:1.1.8
 
