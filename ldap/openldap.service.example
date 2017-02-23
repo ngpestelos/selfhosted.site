@@ -1,0 +1,27 @@
+[Unit]
+Description=openldap Service
+After=docker.service
+
+[Service]
+Type=simple
+User=core
+ExecStart=/usr/bin/docker run \
+          --volume /home/core/certs:/container/service/slapd/assets/certs \
+          --volume /home/core/openldap/etc:/etc/ldap/slapd.d \
+          --volume /home/core/openldap/data:/var/lib/ldap \
+          --publish 389:389 \
+          --publish 636:636 \
+          --env LDAP_TLS_CRT_FILENAME=cert.pem \
+          --env LDAP_TLS_KEY_FILENAME=key.pem \
+          --env LDAP_TLS_CA_CRT_FILENAME=ca.pem \
+          --env LDAP_TLS_ENFORCE=true \
+          --env LDAP_TLS_CIPHER_SUITE=SECURE128:-VERS-SSL3.0:+VERS-TLS1.2 \
+          --env LDAP_TLS_VERIFY_CLIENT=never \
+          --env LDAP_TLS_PROTOCOL_MIN=1.2 \
+          --env LDAP_ORGANISATION= \
+          --env LDAP_DOMAIN= \
+          --env LDAP_ADMIN_PASSWORD= \
+          osixia/openldap:1.1.8
+
+[Install]
+WantedBy=multi-user.target

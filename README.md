@@ -23,7 +23,16 @@ TODO Cluster Diagram
 * Homebrew 1.1.10
 * terraform 0.8.7
 
+#### Certificates
+
+* certs/cert.pem
+* certs/key.pem
+* certs/ca.pem
+
+I use a wildcard certificate (not included).
+
 ### Tasks 
 
 * [Prepare DigitalOcean](digitalocean/README.md)
 * [Provision droplets](terraform/provision.md)
+* [Install LDAP](ldap/README.md)
