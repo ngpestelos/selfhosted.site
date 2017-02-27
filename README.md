@@ -33,3 +33,4 @@ I use a wildcard certificate (not included).
 * [Prepare DigitalOcean](digitalocean/README.md)
 * [Provision droplets](terraform/provision.md)
 * [Install OpenShift](openshift/README.md)
+* Destroy droplets
