@@ -1,5 +1,0 @@
-hosts
-files/ca.pem
-files/cert.pem
-files/key.pem
-*.retry
