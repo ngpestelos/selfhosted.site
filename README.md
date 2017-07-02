@@ -22,11 +22,11 @@ with Docker and Kubernetes and would like to bring up an OpenShift cluster from 
 
 #### Certificates
 
+`selfhosted.site` uses a wildcard certificate (not included) and assumes the files to be in these locations:
+
 * certs/cert.pem
 * certs/key.pem
 * certs/ca.pem
-
-I use a wildcard certificate (not included).
 
 ### Tasks
 
