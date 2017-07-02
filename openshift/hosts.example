@@ -11,20 +11,20 @@ enable_excluders=false
 openshift_release=1.4.1
 openshift_router_selector='region=infra'
 openshift_registry_selector='region=infra'
+openshift_hostname="{{ ansible_default_ipv4.address }}"
+openshift_public_hostname="{{ inventory_hostname }}"
 openshift_master_default_subdomain='selfhosted.site'
-openshift_master_cluster_hostname='master-1.selfhosted.site'
-openshift_master_cluster_public_hostname='master-1.selfhosted.site'
-openshift_master_identity_providers=[{'name': 'ldap_auth', 'login': 'true', 'challenge': 'false', 'kind': 'LDAPPasswordIdentityProvider', 'attributes': { 'id': ['dn'], 'email': ['mail'], 'name': ['uid'], 'preferredUsername': ['uid'] }, 'bindDN': 'cn=admin,dc=selfhosted,dc=site', 'bindPassword': 'asdfasdf', 'url': "ldap://ldap.selfhosted.site/ou=Users,dc=selfhosted,dc=site?userid" }]
+openshift_master_cluster_hostname="{{ ansible_default_ipv4.address }}"
+openshift_master_cluster_public_hostname="{{ inventory_hostname }}"
+openshift_master_named_certificates=[{ "certfile": "/path/to/cert.pem", "keyfile": "/path/to/key.pem", "cafile": "/path/to/ca.pem" }]
+openshift_master_overwrite_named_certificates=true
+openshift_master_access_token_max_seconds=2592000
 
 [masters]
-master-1.selfhosted.site
+master.selfhosted.site
 
 [nodes]
-worker-1.selfhosted.site openshift_node_labels="{'region': 'infra'}"
-worker-2.selfhosted.site
-gluster-1.selfhosted.site openshift_node_labels="{'region': 'storage'}"
-gluster-2.selfhosted.site openshift_node_labels="{'region': 'storage'}"
-gluster-3.selfhosted.site openshift_node_labels="{'region': 'storage'}"
+master.selfhosted openshift_node_labels="{'region': 'infra'}" openshift_schedulable=true
 
 [etcd]
 etcd-1.selfhosted.site
